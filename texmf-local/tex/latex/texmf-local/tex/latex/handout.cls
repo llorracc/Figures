@@ -31,9 +31,9 @@
 \ProvidesClass{handout}[2014/10/29 LaTeX class for handouts written by Christopher Carroll]
 \NeedsTeXFormat{LaTeX2e}
 % \RequirePackage{rotating}
-\RequirePackage{snapshot} % Creates list of external files used by a LaTeX document
+
 \RequirePackage{ifthen}
-\RequirePackage{changepage}
+\RequirePackage{chngpage}
 
 % If unspecified whether pdf output (instead of dvi) is being used, determine that it SHOULD be
 \newif\ifdvi\dvitrue
@@ -107,56 +107,14 @@ amsmath,amssymb,amsfonts,amsthm
 ,threeparttable,dcolumn,multicol,multirow,booktabs % table environment extensions
 ,latexsym
 ,afterpage
-,enotez
+,endnotes
 ,moreverb
 ,hhline    % Allow double hlines
 ,tipa      % Define more characters, in particular the \textthorn character
 ,color
-,accents
-,appendix
 }
 
-\DeclareInstance{enotez-list}{superscriptednotes}{paragraph}
-  {
-    number = \textsuperscript{#1}
-  }
-% to get endnotes with superscripts, use \printendnotes[superscriptednotes]
-
-% \RequirePackage{handout} % Removed 20170801 because won't work when invoked from nonroot paths
-% Contents of the file are pasted in below
-
-%---------------Custom Definitions--------------
-
-\def\liminf{\mathop{\rm lim\, inf}\limits} 
-\DeclareMathOperator{\Ex}{\mathbb{E}} % Expectations operator 
-\def\var{\operatorname{var}} % variance
-\def\cov{\operatorname{cov}} % covariance
-\def\std{\operatorname{std}} % standard deviation
-\def\argmax{\operatornamewithlimits{arg\,max}} % argmax
-
-%---------------Custom Modifications----------------------
-
-% \htline defines a thick horizontal line in table
-\def\htline{\noalign{\hrule height 2\arrayrulewidth}}
-
-% \hdline defines a dotted horizontal line in table
-\def\hdline{\noalign{.\dotfill{}.}}
-
-%To keep footnotes on a single page except in extreme cases
-\interfootnotelinepenalty=5000 %from 0 to 10000
-
-%To prevent hyphenation
-\hyphenpenalty=5000 %from 0 to 10000, default is 200
-
-%To prevent breaking math formula
-\relpenalty=4000 %from 0 to 10000, default is 500
-
-%To prevent breaking math formula after binary operator 
-\binoppenalty=10000 %from 0 to 10000, default is 700
-
-%--------------------------------------------------------
-
-
+\RequirePackage{handout}
 \RequirePackage[mathscr]{eucal}
 \RequirePackage[normalem]{ulem}
 \providecommand\bmmax{0} % Prevent boldmath package from using up too much memory
@@ -196,7 +154,7 @@ amsmath,amssymb,amsfonts,amsthm
 
 % citations and bibliography
 \RequirePackage[authoryear]{natbib}
-\AtBeginDocument{\renewcommand{\refname}{References}
+\AtBeginDocument{\renewcommand{\refname}{\clearpage References}
 \renewcommand\@makefnmark
   {\mbox{\textsuperscript{\tiny\@thefnmark}}} % Restore footnote defn after titlepage redefines it
 \ifdvi

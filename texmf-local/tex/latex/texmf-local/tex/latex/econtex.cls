@@ -13,8 +13,8 @@
 %%% This document class is based on the "scrartcl" class
 %%% from the KOMA script bundle.  For documentation, Google KOMA-Script Documentation
 %%%
-%%% The corresponding BibTeX style file "handout.bst" should be used
-%%% for the bibliography: \bibliographystyle{handout}
+%%% The corresponding BibTeX style file "econtex.bst" should be used
+%%% for the bibliography: \bibliographystyle{econtex}
 %%%
 %%% In addition to the options for scrartcl, this package includes an additional option
 %%% titlepage = include a title page (with command "\maketitle", or "\maketitleWithForcedDate{}")
@@ -27,13 +27,12 @@
 %%%     \jelclass can be used to show JEL classifications below the abstract
 %%%     \thanks{text of the thank-you footnote} produces a footnote at the bottom of the page containing the text
 
-% Made by handoutMake.sh
-\ProvidesClass{handout}[2014/10/29 LaTeX class for handouts written by Christopher Carroll]
+\ProvidesClass{econtex}[2017/08/01 LaTeX class for economics papers, handouts, and exam questions written by Christopher Carroll]
 \NeedsTeXFormat{LaTeX2e}
 % \RequirePackage{rotating}
 \RequirePackage{snapshot} % Creates list of external files used by a LaTeX document
 \RequirePackage{ifthen}
-\RequirePackage{changepage}
+\RequirePackage{chngpage}
 
 % If unspecified whether pdf output (instead of dvi) is being used, determine that it SHOULD be
 \newif\ifdvi\dvitrue
@@ -107,22 +106,14 @@ amsmath,amssymb,amsfonts,amsthm
 ,threeparttable,dcolumn,multicol,multirow,booktabs % table environment extensions
 ,latexsym
 ,afterpage
-,enotez
+,endnotes
 ,moreverb
 ,hhline    % Allow double hlines
 ,tipa      % Define more characters, in particular the \textthorn character
 ,color
-,accents
-,appendix
 }
 
-\DeclareInstance{enotez-list}{superscriptednotes}{paragraph}
-  {
-    number = \textsuperscript{#1}
-  }
-% to get endnotes with superscripts, use \printendnotes[superscriptednotes]
-
-% \RequirePackage{handout} % Removed 20170801 because won't work when invoked from nonroot paths
+% \RequirePackage{econtex} % Removed 20170801 because won't work when invoked from nonroot paths
 % Contents of the file are pasted in below
 
 %---------------Custom Definitions--------------
@@ -167,7 +158,7 @@ amsmath,amssymb,amsfonts,amsthm
 \RequirePackage{url}
 \def\UrlFont{\ttfamily}
 
-\usepackage[handout]{optional} % Enable the control of compilation using options passed on startup
+\usepackage[econtex]{optional} % Enable the control of compilation using options passed on startup
 \opt{EndFloats}{\RequirePackage[noheads,nolists,tablesfirst,nomarkers]{endfloat}}
 
 % page format, margins if PrintGeom option is invoked
@@ -196,7 +187,7 @@ amsmath,amssymb,amsfonts,amsthm
 
 % citations and bibliography
 \RequirePackage[authoryear]{natbib}
-\AtBeginDocument{\renewcommand{\refname}{References}
+\AtBeginDocument{\renewcommand{\refname}{\clearpage References}
 \renewcommand\@makefnmark
   {\mbox{\textsuperscript{\tiny\@thefnmark}}} % Restore footnote defn after titlepage redefines it
 \ifdvi
@@ -217,7 +208,7 @@ amsmath,amssymb,amsfonts,amsthm
 
 \renewcommand{\maketitle}{
 \ifthenelse{ \isundefined\@forcedate }{ 
-   \ClassWarningNoLine{handout}{{\protect\forcedate} is undefined in the .tex file; please define it and rerun}}{}
+   \ClassWarningNoLine{econtex}{{\protect\forcedate} is undefined in the .tex file; please define it and rerun}}{}
    \ifthenelse{\equal{\theIncludeTitlePage}{1}}{
       \let\footnotesize\scriptsize
       \thispagestyle{empty}
@@ -245,7 +236,7 @@ amsmath,amssymb,amsfonts,amsthm
 
 
 \newcommand{\maketitleWithForcedDate}[1]{
-\ClassWarningNoLine{handout}{\protect\maketitleWithForcedDate{} is deprecated.  To set a date different from the current one, just use the \protect\date{(string desired to signify paper date)}}
+\ClassWarningNoLine{econtex}{\protect\maketitleWithForcedDate{} is deprecated.  To set a date different from the current one, just use the \protect\date{(string desired to signify paper date)}}
 
    \ifthenelse{\equal{\theIncludeTitlePage}{1}}{
       \let\footnotesize\scriptsize
@@ -291,7 +282,7 @@ amsmath,amssymb,amsfonts,amsthm
    \noindent \hrule height 0.4pt depth 0.0pt width \textwidth \relax
    \vspace*{0mm}
    \ifthenelse{ \isundefined\@keywords }{
-   \ClassWarningNoLine{handout}{No keywords specified.
+   \ClassWarningNoLine{econtex}{No keywords specified.
       Please use the command \protect\keywords}
    }{
    }
@@ -301,7 +292,7 @@ amsmath,amssymb,amsfonts,amsthm
 \begin{Description}
 \item[\textbf{Keywords~}] \@keywords
 \ifthenelse{ \isundefined\@jelclass }{
-\ClassWarningNoLine{handout}{No JEL classification specified.
+\ClassWarningNoLine{econtex}{No JEL classification specified.
    Please use the command \protect\jelclass}
 }{
 \item[\textbf{JEL codes~}] \@jelclass
@@ -342,9 +333,9 @@ amsmath,amssymb,amsfonts,amsthm
 
 \RequirePackage[multiple]{footmisc}
 \RequirePackage{manyfoot}
-%\RequirePackage{perpage} \DefineFNsymbols{blank}[text]{{} {} {} {} {}} \setfnsymbol{blank} \DeclareNewFootnote{B}[fnsymbol] \MakePerPage{footnoteB} \renewcommand{\thanks}{\footnoteB} \newcommand{\thanksFooter}{\footnoteB}
+\RequirePackage{perpage} \DefineFNsymbols{blank}[text]{{} {} {} {} {}} \setfnsymbol{blank} \DeclareNewFootnote{B}[fnsymbol] \MakePerPage{footnoteB} \renewcommand{\thanks}{\footnoteB} \newcommand{\thanksFooter}{\footnoteB}
 
-% 20170126: perpage package conflicts with something else so is removed in handoutMake.sh
+% 20170126: perpage package conflicts with something else so is removed in econtexMake.sh
 
 \hfuzz2pt % Don't bother to report over-full boxes if over-edge is < 2pt
 
