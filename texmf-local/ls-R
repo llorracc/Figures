@@ -15,6 +15,7 @@ bst
 .DS_Store
 .gitkeep
 auto
+economics-UTF8.bib
 economics.bib
 
 ./bibtex/bib/auto:
@@ -36,8 +37,8 @@ plain
 .DS_Store
 .gitkeep
 ReadMe.texmf
-_region_.tex
 articleNoRefHead.cls
+auto
 bibMake.tex
 cvBibMake.tex
 econtex.cls
@@ -58,6 +59,9 @@ tex4ht
 tex4htMakeCFG.sh
 texmf-local
 titlesec.sty
+
+./tex/latex/auto:
+econtexSetup.el
 
 ./tex/latex/tex4ht:
 pictureenv.4ht
